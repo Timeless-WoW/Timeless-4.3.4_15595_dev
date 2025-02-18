@@ -1093,80 +1093,51 @@ class ScriptMgr
 template <typename _CreatureScript>
 struct CreatureScriptLoaderEx : public CreatureScript
 {
-    CreatureScriptLoaderEx(const char* scriptname) :
-    CreatureScript(scriptname)
-    {}
-
-    CreatureAI* GetAI(Creature* creature) const
-    {
-        return new _CreatureScript(creature);
-    }
+    CreatureScriptLoaderEx(const char* scriptname) : CreatureScript(scriptname) {}
+    CreatureAI* GetAI(Creature* creature) const { return new _CreatureScript(creature); }
 };
 
 template <typename _GameObjectScript>
 struct GameObjectScriptLoaderEx : public GameObjectScript
 {
-    GameObjectScriptLoaderEx(const char* scriptname) :
-    GameObjectScript(scriptname)
-    {}
-
-    GameObjectAI* GetAI(GameObject* go) const
-    {
-        return new _GameObjectScript(go);
-    }
+    GameObjectScriptLoaderEx(const char* scriptname) : GameObjectScript(scriptname) {}
+    GameObjectAI* GetAI(GameObject* go) const { return new _GameObjectScript(go); }
 };
 
 template <class _SpellScript>
 struct SpellScriptLoaderEx : public SpellScriptLoader
 {
-    SpellScriptLoaderEx(const char* name) : SpellScriptLoader(name)
-    {}
-
-    SpellScript* GetSpellScript() const
-    {
-        return new _SpellScript();
-    }
+    SpellScriptLoaderEx(const char* name) : SpellScriptLoader(name) {}
+    SpellScript* GetSpellScript() const { return new _SpellScript(); }
 };
 
 template <class _AuraScript>
 struct AuraScriptLoaderEx : public SpellScriptLoader
 {
-    AuraScriptLoaderEx(const char* name) : SpellScriptLoader(name)
-    {}
-
-    AuraScript* GetAuraScript() const
-    {
-        return new _AuraScript();
-    }
+    AuraScriptLoaderEx(const char* name) : SpellScriptLoader(name) {}
+    AuraScript* GetAuraScript() const { return new _AuraScript(); }
 };
 
 template <class _SpellScript, class _AuraScript>
 struct SpellAuraScriptLoaderEx : public SpellScriptLoader
 {
-    SpellAuraScriptLoaderEx(const char* name) : SpellScriptLoader(name)
-    {}
-
-    SpellScript* GetSpellScript() const
-    {
-        return new _SpellScript();
-    }
-
-    AuraScript* GetAuraScript() const
-    {
-        return new _AuraScript();
-    }
+    SpellAuraScriptLoaderEx(const char* name) : SpellScriptLoader(name) {}
+    SpellScript* GetSpellScript() const { return new _SpellScript(); }
+    AuraScript* GetAuraScript() const { return new _AuraScript(); }
 };
 
 template <class _InstanceScript>
 struct InstanceScriptLoaderEx : public InstanceMapScript
 {
-    InstanceScriptLoaderEx(const char* name, uint32 map_id) : InstanceMapScript(name, map_id)
-    {}
-
-    InstanceScript* GetInstanceScript(InstanceMap* map) const
-    {
-        return new _InstanceScript(map);
-    }
+    InstanceScriptLoaderEx(const char* name, uint32 map_id) : InstanceMapScript(name, map_id) {}
+    InstanceScript* GetInstanceScript(InstanceMap* map) const { return new _InstanceScript(map); }
 };
+
+#define RegisterCreatureAI(script_name)         new CreatureScriptLoaderEx<script_name>(#script_name)
+#define RegisterGameObjectAI(script_name)       new GameObjectScriptLoaderEx<script_name>(#script_name)
+#define RegisterSpellScript(script_name)        new SpellScriptLoaderEx<script_name>(#script_name)
+#define RegisterAuraScript(script_name)         new AuraScriptLoaderEx<script_name>(#script_name)
+#define RegisterInstanceScript(script_name)     new InstanceScriptLoaderEx<script_name>(#script_name)
+#define RegisterSpellAndAuraScript(spell_scriptname, aura_scriptname) new SpellAuraScriptLoaderEx<spell_scriptname, aura_scriptname>(#spell_scriptname)
 
 #endif
