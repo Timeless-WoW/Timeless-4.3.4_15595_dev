@@ -748,17 +748,6 @@ typedef std::vector<HotfixInfo> HotfixData;
 
 class PlayerDumpReader;
 
-struct ReportQuestInfo
-{
-    uint32 questId;
-    uint32 status;
-    uint32 count;
-    std::string comment;
-    bool needSave;
-};
-
-typedef std::vector<ReportQuestInfo *> ReportQuestData;
-
 class ObjectMgr
 {
     friend class PlayerDumpReader;
@@ -1406,12 +1395,6 @@ class ObjectMgr
 
         void LoadMissingKeyChains();
 
-        void LoadReportQuestData();
-        ReportQuestData const & GetReportQuestData() const { return _ReportQuestData; }
-        void UpdateReportQuestData(uint32 diff);
-        void ModifyReportQuestData(uint32 questId, uint32 status, uint32 count);
-        void GetReportQuestStatuCount(uint32 entry, uint32 &status, uint32 &count);
-
     private:
         // first free id for selected id type
         uint32 _auctionId;
@@ -1568,8 +1551,6 @@ class ObjectMgr
         };
         HotfixData _hotfixData;
         std::queue<uint32 > _freeItemGuid;
-        ReportQuestData _ReportQuestData;
-        uint32 m_reportQuestTimer;
 
         struct BroadcastTextHelper
         {

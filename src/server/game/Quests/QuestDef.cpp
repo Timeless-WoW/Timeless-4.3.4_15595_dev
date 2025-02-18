@@ -403,25 +403,3 @@ uint32 Quest::CalculateHonorGain(uint8 level) const
 
     return honor;
 }
-
-bool Quest::IsReported(Player* player) const
-{
-    if (!player)
-        return false;
-    
-    uint32 status = 0;
-    uint32 count = 0;
-    bool finish = false;
-
-    sObjectMgr->GetReportQuestStatuCount(GetQuestId(), status, count);
-    if (!player->HaveReportQuest(GetQuestId()))
-    {
-        count++;
-        sObjectMgr->ModifyReportQuestData(GetQuestId(), status, count);
-    }
-
-    if (status == 1)
-        finish = true;
-        
-    return finish;
-}

@@ -1344,9 +1344,6 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_DYN_ITEM_GUID_SIZE] = sConfigMgr->GetIntDefault("ItemLoading.stackSize", 0);
     m_int_configs[CONFIG_DYN_ITEM_SQL_REQUEST_SIZE] = sConfigMgr->GetIntDefault("ItemLoading.requestSize", 2000);
 
-    // -report quests
-    m_int_configs[CONFIG_REPORTQUEST_UPDATETIMER] = sConfigMgr->GetIntDefault("ReportQuests.UpdateTimer", 300000);
-
     m_bool_configs[CONFIG_ASSIGN_MISSING_BROADCAST_AT_STARTUP]   = sConfigMgr->GetBoolDefault("Broadcast.autogenerate", false);
 
     m_bool_configs[CONFIG_ELIGIBLE_CALL_TO_ARM_LFG]   = sConfigMgr->GetBoolDefault("DungeonFinder.callToArmEnable", false);
@@ -1972,9 +1969,6 @@ void World::SetInitialWorldSettings()
     TC_LOG_INFO("server.loading", "Loading missing KeyChains...");
     sObjectMgr->LoadMissingKeyChains();
 
-    TC_LOG_INFO("misc", "Loading report quest info...");
-    sObjectMgr->LoadReportQuestData();
-
 #ifdef TRINITY_DEBUG
     TC_LOG_INFO("server.loading", "Validate all player spells...");
     VerificationMgr::CheckAllPlayerSpells();
@@ -2293,8 +2287,6 @@ void World::Update(uint32 diff)
 
     // update the instance reset times
     sInstanceSaveMgr->Update();
-
-    sObjectMgr->UpdateReportQuestData(diff);
 
     // And last, but not least handle the issued cli commands
     ProcessCliCommands();

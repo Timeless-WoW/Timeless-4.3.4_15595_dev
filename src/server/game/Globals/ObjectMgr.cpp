@@ -241,8 +241,7 @@ ObjectMgr::ObjectMgr():
     _hiDoGuid(1),
     _hiCorpseGuid(1),
     _hiAreaTriggerGuid(1),
-    _hiMoTransGuid(1),
-    m_reportQuestTimer(1)
+    _hiMoTransGuid(1)
 {
     for (uint8 i = 0; i < MAX_CLASSES; ++i)
         for (uint8 j = 0; j < MAX_RACES; ++j)
@@ -278,10 +277,6 @@ ObjectMgr::~ObjectMgr()
 
     for (AccessRequirementContainer::iterator itr = _accessRequirementStore.begin(); itr != _accessRequirementStore.end(); ++itr)
         delete itr->second;
-
-    for (unsigned int i = 0; i < _ReportQuestData.size(); i++)
-        delete _ReportQuestData[i];
-
 }
 
 void ObjectMgr::AddLocaleString(std::string const& s, LocaleConstant locale, StringVector& data)
@@ -9601,103 +9596,6 @@ void ObjectMgr::LoadMissingKeyChains()
     while (result->NextRow());
 
     TC_LOG_INFO("server.loading", ">> Loaded %u KeyChain entries in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
-}
-
-void ObjectMgr::LoadReportQuestData()
-{
-    uint32 oldMSTime = getMSTime();
-
-    QueryResult result = WorldDatabase.Query("SELECT id, status, count, comment FROM report_quest");
-
-    if (!result)
-    {
-        TC_LOG_ERROR("server.loading", ">> Loaded 0 Report Quests definitions. DB table `report_quest` is empty.");
-        return;
-    }
-
-    uint32 count = 0;
-
-    _ReportQuestData.reserve(result->GetRowCount());
-
-    do
-    {
-        Field* fields = result->Fetch();
-
-        ReportQuestInfo *info = new ReportQuestInfo();
-        info->questId = fields[0].GetUInt32();
-        info->status =  fields[1].GetUInt32();
-        info->count =  fields[2].GetUInt32();
-        info->comment = fields[3].GetString();
-        info->needSave = false;
-        _ReportQuestData.push_back(info);
-        ++count;
-    }
-    while (result->NextRow());
-
-    TC_LOG_INFO("server.loading", ">> Loaded %u report quest info entries in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
-}
-
-void ObjectMgr::UpdateReportQuestData(uint32 diff)
-{
-    if (m_reportQuestTimer <= diff)
-    {
-        if (!_ReportQuestData.empty())
-        {
-            SQLTransaction trans = WorldDatabase.BeginTransaction();
-            for (unsigned int i = 0; i < _ReportQuestData.size(); i++)
-            {
-                if (_ReportQuestData[i]->needSave)
-                {
-                    _ReportQuestData[i]->needSave = false;
-                    uint8 index = 0;
-                    PreparedStatement* stmt = WorldDatabase.GetPreparedStatement(WORLD_UPD_REPORT_QUESTS);
-                    stmt->setUInt32(index, _ReportQuestData[i]->questId);
-                    stmt->setUInt32(++index, _ReportQuestData[i]->status);
-                    stmt->setUInt32(++index, _ReportQuestData[i]->count);
-                    trans->Append(stmt);
-                }
-            }
-            WorldDatabase.CommitTransaction(trans);
-        }
-        m_reportQuestTimer = sWorld->getIntConfig(CONFIG_REPORTQUEST_UPDATETIMER);
-    }
-    else
-        m_reportQuestTimer -= diff;
-}
-
-void ObjectMgr::ModifyReportQuestData(uint32 questId, uint32 status, uint32 count)
-{
-    bool found = false;
-    for (unsigned int i = 0; i < _ReportQuestData.size(); i++)
-        if (_ReportQuestData[i]->questId == questId)
-        {
-            found = true;
-            _ReportQuestData[i]->needSave = true;
-            _ReportQuestData[i]->status = status;
-            _ReportQuestData[i]->count = count;
-            break;
-        }
-    if (!found)
-    {
-        ReportQuestInfo *info = new ReportQuestInfo();
-        info->questId = questId;
-        info->status = status;
-        info->count = count;
-        info->needSave = true;
-        info->comment = "";
-        _ReportQuestData.push_back(info);
-    }
-}
-
-void ObjectMgr::GetReportQuestStatuCount(uint32 entry, uint32 &status, uint32 &count)
-{
-    for (unsigned int i = 0; i < _ReportQuestData.size(); i++)
-        if (_ReportQuestData[i]->questId == entry)
-        {
-            status = _ReportQuestData[i]->status;
-            count = _ReportQuestData[i]->count;
-            break;
-        }
 }
 
 void ObjectMgr::LoadFactionChangeTitles()

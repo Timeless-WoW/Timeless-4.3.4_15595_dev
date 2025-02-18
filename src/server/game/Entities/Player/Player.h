@@ -2973,8 +2973,6 @@ class Player : public Unit, public GridObject<Player>
         void SwitchRaidMap(uint32 raidId, Difficulty previousDifficulty, Difficulty newDifficulty, Map *map);
         void SwitchBoundInstance(uint32 /*mapid*/, Difficulty previousDifficulty, Difficulty newDifficulty);
 
-        bool HaveReportQuest(uint32 questId) { return _questReported[questId]; }
-        void ReportQuest(uint32 questId) { _questReported[questId] = true; }
         void SetTempCallToArmsRoles(uint8 roles) { _tmpLfgRolesCheck = roles; }
         uint8 GetCallToArmsTempRoles() { return _tmpLfgRolesCheck; }
 
@@ -3399,8 +3397,6 @@ class Player : public Unit, public GridObject<Player>
         bool _hasValidLFGLeavePoint;
 
         bool m_IsMovieMaker;
-
-        std::map<uint32, bool > _questReported;
 
         uint8 _tmpLfgRolesCheck;
         int32 m_comboPointTimer;

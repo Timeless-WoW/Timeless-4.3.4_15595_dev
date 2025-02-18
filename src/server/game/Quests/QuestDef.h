@@ -296,7 +296,6 @@ class Quest
         bool   IsRaidQuest(Difficulty difficulty) const;
         bool   IsAllowedInRaid(Difficulty difficulty) const;
         bool   IsDFQuest() const { return SpecialFlags & QUEST_SPECIAL_FLAGS_DF_QUEST; }
-        bool   IsReported(Player* player) const;
         uint32 CalculateHonorGain(uint8 level) const;
 
         // multiple values

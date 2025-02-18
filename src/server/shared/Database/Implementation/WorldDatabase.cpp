@@ -98,5 +98,4 @@ void WorldDatabaseConnection::DoPrepareStatements()
     PrepareStatement(WORLD_UPD_ARCHAEOLOGY_REASEARCHSITE_SKILL_REQ, "UPDATE research_sites SET minSkill = ? where entry = ?", CONNECTION_ASYNC);
     PrepareStatement(WORLD_UPD_ARCHAEOLOGY_DISABLE_RESEARCH_SITE, "UPDATE research_sites SET enable = 2 where entry = ?", CONNECTION_ASYNC);
     PrepareStatement(WORLD_INS_ARENA_LOG, "INSERT INTO arena_log (endTime, duration, winnerTeam, looserTeam, winnerRating, winnerMMR, looserRating, looserMMR, winpl1, winpl2, winpl3, winpl4, winpl5, loosepl1, loosepl2, loosepl3, loosepl4, loosepl5, windmg, winheal, winkill, loosedmg, looseheal, loosekill, winIP1, winIP2, winIP3, winIP4, winIP5, looseIP1, looseIP2, looseIP3, looseIP4, looseIP5) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", CONNECTION_ASYNC);
-    PrepareStatement(WORLD_UPD_REPORT_QUESTS, "REPLACE INTO report_quest (id, status, count) VALUES(?, ?, ?)", CONNECTION_ASYNC);
 }
