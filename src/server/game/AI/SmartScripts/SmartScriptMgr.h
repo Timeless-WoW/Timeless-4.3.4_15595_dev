@@ -159,9 +159,32 @@ enum SMART_EVENT
     SMART_EVENT_FRIENDLY_HEALTH_PCT      = 74,      // minHpPct, maxHpPct, repeatMin, repeatMax
     SMART_EVENT_DISTANCE_CREATURE        = 75,      // guid, entry, distance, repeat
     SMART_EVENT_DISTANCE_GAMEOBJECT      = 76,      // guid, entry, distance, repeat
-    SMART_EVENT_DISTANCE_PLAYER          = 77,      // range, aura, ispresent, repeat
+    SMART_EVENT_COUNTER_SET              = 77,      // NYI
+    SMART_EVENT_SCENE_START              = 78,      // NYI
+    SMART_EVENT_SCENE_TRIGGER            = 79,      // NYI
+    SMART_EVENT_SCENE_CANCEL             = 80,      // NYI
+    SMART_EVENT_SCENE_COMPLETE           = 81,      // NYI
+    SMART_EVENT_SUMMONED_UNIT_DIES       = 82,      // NYI
+    SMART_EVENT_ON_SPELL_CAST            = 83,      // NYI
+    SMART_EVENT_ON_SPELL_FAILED          = 84,      // NYI
+    SMART_EVENT_ON_SPELL_START           = 85,      // NYI
+    SMART_EVENT_ON_DESPAWN               = 86,      // NYI
+    SMART_EVENT_SEND_EVENT_TRIGGER       = 87,      // NYI
+    SMART_EVENT_AREATRIGGER_EXIT         = 88,      // NYI
+    SMART_EVENT_UNUSED_89                = 89,      // UNUSED
+    SMART_EVENT_UNUSED_90                = 90,      // UNUSED
+    SMART_EVENT_UNUSED_91                = 91,      // UNUSED
+    SMART_EVENT_UNUSED_92                = 92,      // UNUSED
+    SMART_EVENT_UNUSED_93                = 93,      // UNUSED
+    SMART_EVENT_UNUSED_94                = 94,      // UNUSED
+    SMART_EVENT_UNUSED_95                = 95,      // UNUSED
+    SMART_EVENT_UNUSED_96                = 96,      // UNUSED
+    SMART_EVENT_UNUSED_97                = 97,      // UNUSED
+    SMART_EVENT_UNUSED_98                = 98,      // UNUSED
+    SMART_EVENT_UNUSED_99                = 99,      // UNUSED
+    SMART_EVENT_DISTANCE_PLAYER          = 100,     // range, aura, ispresent, repeat
 
-    SMART_EVENT_END                      = 78
+    SMART_EVENT_END
 };
 
 struct SmartEvent
