@@ -292,6 +292,11 @@ struct SmartEvent
 
         struct
         {
+            uint32 onRemove;
+        } charm;
+
+        struct
+        {
             uint32 spell;
             uint32 count;
             uint32 repeatMin;
