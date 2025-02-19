@@ -103,7 +103,7 @@ struct PetSpellData
     uint32          Id;
 };
 
-typedef UNORDERED_MAP<uint32, PetSpellData> PetSpellMap;
+typedef std::unordered_map<uint32, PetSpellData> PetSpellMap;
 
 
 struct PetSpellCooldownData
@@ -111,7 +111,7 @@ struct PetSpellCooldownData
     uint32          time;
     DataState       _state;
 };
-typedef UNORDERED_MAP<uint32, PetSpellCooldownData> PetSpellCooldown;
+typedef std::unordered_map<uint32, PetSpellCooldownData> PetSpellCooldown;
 
 struct PetAuraData
 {
@@ -163,7 +163,7 @@ struct PetData
    DataState            _state;
 };
 
-typedef UNORDERED_MAP<uint32, PetData*> Stable;
+typedef std::unordered_map<uint32, PetData*> Stable;
 
 #define PET_FOLLOW_DIST  1.0f
 #define PET_FOLLOW_ANGLE (M_PI/2)

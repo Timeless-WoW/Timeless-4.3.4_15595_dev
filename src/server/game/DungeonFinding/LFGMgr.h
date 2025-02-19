@@ -156,7 +156,7 @@ typedef std::map<uint64, LfgProposalPlayer> LfgProposalPlayerContainer;
 typedef std::map<uint64, LfgPlayerBoot> LfgPlayerBootContainer;
 typedef std::map<uint64, LfgGroupData> LfgGroupDataContainer;
 typedef std::map<uint64, LfgPlayerData> LfgPlayerDataContainer;
-typedef UNORDERED_MAP<uint32, LFGDungeonData> LFGDungeonContainer;
+typedef std::unordered_map<uint32, LFGDungeonData> LFGDungeonContainer;
 
 typedef std::map<uint32/*pair32(map, diff)*/, uint32> LfgMapToDungeonId;
 

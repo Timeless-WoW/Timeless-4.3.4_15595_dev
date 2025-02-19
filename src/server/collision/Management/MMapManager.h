@@ -19,7 +19,7 @@
 #ifndef _MMAP_MANAGER_H
 #define _MMAP_MANAGER_H
 
-#include "UnorderedMap.h"
+#include <unordered_map>
 #include "DetourAlloc.h"
 #include "DetourNavMesh.h"
 #include "DetourNavMeshQuery.h"
@@ -27,8 +27,8 @@
 //  move map related classes
 namespace MMAP
 {
-    typedef UNORDERED_MAP<uint32, dtTileRef> MMapTileSet;
-    typedef UNORDERED_MAP<uint32, dtNavMeshQuery*> NavMeshQuerySet;
+    typedef std::unordered_map<uint32, dtTileRef> MMapTileSet;
+    typedef std::unordered_map<uint32, dtNavMeshQuery*> NavMeshQuerySet;
 
     // dummy struct to hold map's mmap data
     struct MMapData
@@ -51,7 +51,7 @@ namespace MMAP
     };
 
 
-    typedef UNORDERED_MAP<uint32, MMapData*> MMapDataSet;
+    typedef std::unordered_map<uint32, MMapData*> MMapDataSet;
 
     // singleton class
     // holds all all access to mmap loading unloading and meshes

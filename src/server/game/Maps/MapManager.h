@@ -147,7 +147,7 @@ class MapManager
             return (iter == i_maps.end() ? NULL : iter->second);
         }
     private:
-        typedef UNORDERED_MAP<uint32, Map*> MapMapType;
+        typedef std::unordered_map<uint32, Map*> MapMapType;
         typedef std::vector<bool> InstanceIds;
 
         // debugging code, should be deleted some day

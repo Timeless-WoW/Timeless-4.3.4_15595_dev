@@ -7324,7 +7324,7 @@ void ObjectMgr::LoadQuestPOI()
     //                                                0       1   2  3
     QueryResult points = WorldDatabase.Query("SELECT questId, id, x, y FROM quest_poi_points ORDER BY questId DESC, idx");
 
-    UNORDERED_MAP<uint32, UNORDERED_MAP<uint32, std::vector<QuestPOIPoint> > > POIs;
+    std::unordered_map<uint32, std::unordered_map<uint32, std::vector<QuestPOIPoint> > > POIs;
 
     if (points)
     {

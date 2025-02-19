@@ -25,6 +25,7 @@
 #include <ace/ACE_export.h>
 
 #include <cstddef>
+#include <unordered_map>
 
 #define TRINITY_LITTLEENDIAN 0
 #define TRINITY_BIGENDIAN    1
