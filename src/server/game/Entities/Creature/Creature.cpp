@@ -444,6 +444,9 @@ bool Creature::UpdateEntry(uint32 Entry, uint32 team, const CreatureData* data)
         ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
     }
 
+    if (cInfo->InhabitType & INHABIT_ROOTED)
+        SetControlled(true, UNIT_STATE_ROOT);
+
     UpdateMovementFlag();
 
     // TODO: Shouldn't we check whether or not the creature is in water first?

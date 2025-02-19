@@ -290,10 +290,11 @@ typedef UNORDERED_MAP<uint16, CreatureModelInfo> CreatureModelContainer;
 
 enum InhabitTypeValues
 {
-    INHABIT_GROUND = 1,
-    INHABIT_WATER  = 2,
-    INHABIT_AIR    = 4,
-    INHABIT_ANYWHERE = INHABIT_GROUND | INHABIT_WATER | INHABIT_AIR
+    INHABIT_GROUND      = 1,
+    INHABIT_WATER       = 2,
+    INHABIT_AIR         = 4,
+    INHABIT_ROOTED      = 8,
+    INHABIT_ANYWHERE    = INHABIT_GROUND | INHABIT_WATER | INHABIT_AIR
 };
 
 // Enums used by StringTextData::Type (CreatureEventAI)
