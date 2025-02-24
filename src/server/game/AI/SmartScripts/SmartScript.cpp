@@ -63,6 +63,7 @@ SmartScript::~SmartScript()
         delete itr->second;
 
     delete mTargetStorage;
+    mCounterList.clear();
 }
 
 void SmartScript::OnReset()
@@ -79,6 +80,7 @@ void SmartScript::OnReset()
     }
     ProcessEventsFor(SMART_EVENT_RESET);
     mLastInvoker = 0;
+    mCounterList.clear();
 }
 
 void SmartScript::ProcessEventsFor(SMART_EVENT e, Unit* unit, uint32 var0, uint32 var1, bool bvar, const SpellInfo* spell, GameObject* gob)
@@ -1278,6 +1280,11 @@ void SmartScript::ProcessAction(SmartScriptHolder& e, Unit* unit, uint32 var0, u
             }
 
             delete targets;
+            break;
+        }
+        case SMART_ACTION_SET_COUNTER:
+        {
+            StoreCounter(e.action.setCounter.counterId, e.action.setCounter.value, e.action.setCounter.reset);
             break;
         }
         case SMART_ACTION_STORE_TARGET_LIST:
@@ -3003,6 +3010,14 @@ void SmartScript::ProcessEvent(SmartScriptHolder& e, Unit* unit, uint32 var0, ui
             if (gameobject)
                 ProcessTimedAction(e, e.event.distance.repeat, e.event.distance.repeat);
 
+            break;
+        }
+        case SMART_EVENT_COUNTER_SET:
+        {
+            if (GetCounterId(e.event.counter.id) != 0 && GetCounterValue(e.event.counter.id) == e.event.counter.value)
+                return;
+
+            ProcessTimedAction(e, e.event.counter.cooldownMax, e.event.counter.cooldownMax);
             break;
         }
         case SMART_EVENT_DISTANCE_PLAYER:

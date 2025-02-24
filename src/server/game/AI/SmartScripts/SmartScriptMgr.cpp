@@ -628,6 +628,24 @@ bool SmartAIMgr::IsEventValid(SmartScriptHolder& e)
                 }
                 break;
             }
+            case SMART_EVENT_COUNTER_SET:
+            {
+                if (!IsMinMaxValid(e, e.event.counter.cooldownMin, e.event.counter.cooldownMax))
+                    return false;
+
+                if (e.event.counter.id == 0)
+                {
+                    TC_LOG_ERROR("sql.sql", "SmartAIMgr: Event SMART_EVENT_COUNTER_SET using invalid counter id %u, skipped.", e.event.counter.id);
+                    return false;
+                }
+
+                if (e.event.counter.value == 0)
+                {
+                    TC_LOG_ERROR("sql.sql", "SmartAIMgr: Event SMART_EVENT_COUNTER_SET using invalid value %u, skipped.", e.event.counter.value);
+                    return false;
+                }
+                break;
+            }
             case SMART_EVENT_DISTANCE_PLAYER:
             {
                 if (!e.event.playerDistance.aura && e.event.playerDistance.isPresent)
