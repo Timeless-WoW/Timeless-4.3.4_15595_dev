@@ -1087,8 +1087,28 @@ enum SMARTAI_TARGETS
     SMART_TARGET_ACTION_INVOKER_VEHICLE         = 22,   // Unit's vehicle who caused this Event to occur
     SMART_TARGET_OWNER_OR_SUMMONER              = 23,   // Unit's owner or summoner
     SMART_TARGET_THREAT_LIST                    = 24,   // All units on creature's threat list
-    SMART_TARGET_FARTHEST_PLAYER                = 25,   // maxDist
-    SMART_TARGET_END                            = 26
+    SMART_TARGET_CLOSEST_ENEMY                  = 25,   // NYI
+    SMART_TARGET_CLOSEST_FRIENDLY               = 26,   // NYI
+    SMART_TARGET_LOOT_RECIPIENTS                = 27,   // NYI
+    SMART_TARGET_FARTHEST_PLAYER                = 28,   // maxDist
+    SMART_TARGET_VEHICLE_PASSENGER              = 29,   // NYI
+    SMART_TARGET_CLOSEST_UNSPAWNED_GAMEOBJECT	= 30,	// NYI
+    SMART_TARGET_UNUSED_31                      = 31,
+    SMART_TARGET_UNUSED_32                      = 32,
+    SMART_TARGET_UNUSED_33                      = 33,
+    SMART_TARGET_UNUSED_34                      = 34,
+    SMART_TARGET_UNUSED_35                      = 35,
+    SMART_TARGET_UNUSED_36                      = 36,
+    SMART_TARGET_UNUSED_37                      = 37,
+    SMART_TARGET_UNUSED_38                      = 38,
+    SMART_TARGET_UNUSED_39                      = 39,
+    SMART_TARGET_RANDOM_POSITION                = 40,   // NYI
+    SMART_TARGET_INVOKER_SUMMON                 = 41,   // NYI
+    SMART_TARGET_HOSTILE_RANDOM_PLAYER          = 42,   // NYI
+    SMART_TARGET_HOSTILE_RANDOM_NOT_TOP_PLAYER  = 43,   // NYI
+    SMART_TARGET_HOSTILE_RANDOM_AURA            = 44,   // NYI
+
+    SMART_TARGET_END
 };
 
 struct SmartTarget
