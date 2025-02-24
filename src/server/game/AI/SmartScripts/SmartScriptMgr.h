@@ -1090,7 +1090,7 @@ enum SMARTAI_TARGETS
     SMART_TARGET_CLOSEST_ENEMY                  = 25,   // NYI
     SMART_TARGET_CLOSEST_FRIENDLY               = 26,   // NYI
     SMART_TARGET_LOOT_RECIPIENTS                = 27,   // NYI
-    SMART_TARGET_FARTHEST_PLAYER                = 28,   // maxDist
+    SMART_TARGET_FARTHEST                       = 28,   // maxDist, playerOnly, isInLos
     SMART_TARGET_VEHICLE_PASSENGER              = 29,   // NYI
     SMART_TARGET_CLOSEST_UNSPAWNED_GAMEOBJECT	= 30,	// NYI
     SMART_TARGET_UNUSED_31                      = 31,

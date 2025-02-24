@@ -2449,20 +2449,31 @@ ObjectList* SmartScript::GetTargets(SmartScriptHolder const& e, Unit* invoker /*
             }
             break;
         }
-        case SMART_TARGET_FARTHEST_PLAYER:
+        case SMART_TARGET_FARTHEST:
+        {
+            if (me)
             {
-                if (me)
+                bool pOnly = e.target.raw.param2;
+                bool inLos = e.target.raw.param3;
+                std::list<Unit*> units = me->GetNearUnitList(e.target.raw.param1);
+
+                if (units.empty())
+                    break;
+
+                for (Unit* itr : units)
                 {
-                    std::list<Player*> players = me->GetPlayersInRange((float)e.target.playerDistance.dist, true);
-                    if (!players.empty())
-                    {
-                        players.sort(Trinity::ObjectDistanceOrderPred(me));
-                        std::list<Player*>::reverse_iterator ritr = players.rbegin();
-                        l->push_back(*ritr);
-                    }
+                    if (pOnly && !itr->IsPlayer())
+                        units.remove(itr);
+                    if (inLos && !me->IsWithinLOSInMap(itr))
+                        units.remove(itr);
                 }
-                break;
+
+                units.sort(Trinity::ObjectDistanceOrderPred(me));
+                std::list<Unit*>::reverse_iterator ritr = units.rbegin();
+                l->push_back(*ritr);
             }
+            break;
+        }
         case SMART_TARGET_POSITION:
         default:
             break;
