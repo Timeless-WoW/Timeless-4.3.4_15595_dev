@@ -549,10 +549,11 @@ enum SMART_ACTION
     SMART_ACTION_SEND_TARGET_TO_TARGET              = 100,    // id
     SMART_ACTION_SET_HOME_POS                       = 101,    // none
     SMART_ACTION_SET_HEALTH_REGEN                   = 102,    // 0/1
-    SMART_ACTION_SEND_QUEST_EVENT                   = 103,
-    SMART_ACTION_MOVE_TO_POS_FIXED_ORIENTATION      = 104,
 
     SMART_ACTION_MOVE_OFFSET                        = 114,      // PointId (Is better that MOVE_FOWARD, movement via target fields x, y, z.)
+       
+    SMART_ACTION_SEND_QUEST_EVENT                   = 160,    // Any SAI have this acion, we should keep them?
+    SMART_ACTION_MOVE_TO_POS_FIXED_ORIENTATION      = 161,    // Only one SAI have this
     SMART_ACTION_END
 };
 
