@@ -19906,3 +19906,16 @@ void Unit::SendMapObjectEvents(int32 mapobjectid, std::vector<uint8> values)
         data << uint8(value);
     map->SendToPlayers(&data);
 }
+
+std::list<Unit*> Unit::GetNearUnitList(float distance, bool alive)
+{
+    std::list<Unit*> units;
+    Trinity::AnyUnitInObjectRangeCheck checker(this, distance);
+    Trinity::UnitListSearcher<Trinity::AnyUnitInObjectRangeCheck> searcher(this, units, checker);
+    VisitNearbyWorldObject(distance, searcher);
+    if (alive && !units.empty())
+        units.remove_if([](Unit * itr) { return itr && itr->isDead(); });
+
+    return units;
+};
+

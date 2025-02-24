@@ -2538,6 +2538,10 @@ class Unit : public WorldObject
 
         // used for triggers which cast spells for gos
         uint32 m_gameObjectType;
+
+    public:
+        std::list<Unit*> GetNearUnitList(float distance, bool alive = true);
+
 };
 
 namespace Trinity
